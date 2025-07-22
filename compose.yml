@@ -1,7 +1,6 @@
 services:
   wordpress:
     build: .
-    container_name: ${SITE_SLUG}_wordpress_fpm
     restart: unless-stopped
     volumes:
       - ./html:/var/www/html
@@ -29,7 +28,6 @@ services:
 
   nginx:
     image: nginx:stable-alpine
-    container_name: ${SITE_SLUG}_nginx
     restart: unless-stopped
     volumes:
       - ./html:/var/www/html:ro
@@ -41,7 +39,6 @@ services:
 
   db:
     image: mariadb:11.4.7
-    container_name: ${SITE_SLUG}_mariadb
     restart: unless-stopped
     volumes:
       - ./db_data:/var/lib/mysql
@@ -61,7 +58,6 @@ services:
       - internal_site_network
   redis:
     image: redis:6-alpine
-    container_name: ${SITE_SLUG}_redis
     restart: unless-stopped
     volumes:
       - ./redis_data:/data
