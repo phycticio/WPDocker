@@ -42,7 +42,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./db_data:/var/lib/mysql
-      - ./mariadb-conf/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro
+      - ./mariadb/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $WORDPRESS_DB_NAME
