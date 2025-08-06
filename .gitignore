@@ -2,3 +2,5 @@
 .idea
 .env
 .vscode
+html
+db_data
