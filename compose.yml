@@ -60,3 +60,4 @@ services:
 networks:
   internal_site_network:
     driver: overlay
+    attachable: true
