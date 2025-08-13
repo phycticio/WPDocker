@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "pnpm run build:app && pnpm run build:blocks",
-    "build:app": "wp-scripts build --webpack-src-dir=resources --output-path=web/content/themes/cloud/dist --config config/webpack.config.js",
-    "build:blocks": "wp-scripts build --webpack-src-dir=resources/blocks --webpack-copy-php --output-path=web/content/themes/cloud/blocks --config config/blocks.webpack.config.js",
+    "build:app": "wp-scripts build --webpack-src-dir=resources --output-path=app/wp-content/themes/cloud/dist --config config/webpack.config.js",
+    "build:blocks": "wp-scripts build --webpack-src-dir=resources/blocks --webpack-copy-php --output-path=wpp/wp-content/themes/cloud/blocks --config config/blocks.webpack.config.js",
     "dev": "concurrently \"pnpm run dev:app\" \"pnpm run dev:blocks\"",
     "dev:app": "wp-scripts start --webpack-src-dir=resources --output-path=web/content/themes/cloud/dist --config config/webpack.config.js",
     "dev:blocks": "wp-scripts start --webpack-src-dir=resources/blocks --webpack-copy-php --output-path=web/content/themes/cloud/blocks --config config/blocks.webpack.config.js",
