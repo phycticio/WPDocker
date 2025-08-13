@@ -1,0 +1,10 @@
+app/wp-includes
+app/wp-admin
+app/wp-content/cache
+
+auth.json
+
+.idea
+
+vendor
+node_modules

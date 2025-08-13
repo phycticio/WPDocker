@@ -1,0 +1,52 @@
+{
+  "name": "mody/cloud",
+  "type": "project",
+  "license": "MIT",
+  "description": "Mody cloud",
+  "homepage": "https://mody.cloud",
+  "authors": [
+    {
+      "name": "Javier Troya",
+      "email": "javo@modysolutions.com",
+      "homepage": "https://github.com/phycticio"
+    }
+  ],
+  "keywords": [
+    "mody", "cloud", "wordpress", "wp", "wp-config"
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+    },
+    {
+      "type": "composer",
+      "url": "https://connect.advancedcustomfields.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "composer/installers": "^2.2",
+    "wpengine/advanced-custom-fields-pro": "*",
+    "ext-pdo": "*",
+    "wpackagist-plugin/user-role-editor": "^4.64",
+    "wpackagist-plugin/redirection": "^5.5"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "installer-paths": {
+      "app/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "app/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "wordpress-install-dir": "app"
+  }
+}

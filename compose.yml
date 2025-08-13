@@ -1,0 +1,52 @@
+services:
+  wordpress:
+    build: config
+    volumes:
+      - ./app:/var/www/html
+      - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    environment:
+      WORDPRESS_DB_HOST: wp_db
+      WORDPRESS_DB_NAME: $DB_NAME
+      WORDPRESS_DB_USER: $DB_USER
+      WORDPRESS_DB_PASSWORD: $DB_PASSWORD
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:-0}
+      WORDPRESS_TABLE_PREFIX: $WORDPRESS_TABLE_PREFIX
+      WORDPRESS_CONFIG_EXTRA: $WORDPRESS_CONFIG_EXTRA
+      WP_REDIS_HOST: $WORDPRESS_REDIS_HOST
+      WP_REDIS_PORT: ${WORDPRESS_REDIS_PORT:-6379}
+      WP_REDIS_PASSWORD: $WORDPRESS_REDIS_PASSWORD
+      WP_REDIS_DATABASE: ${WORDPRESS_REDIS_DB:-0}
+    depends_on:
+      wp_db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+        - npm_local_network
+
+  wp_db:
+    image: mariadb:11.4.7
+    restart: unless-stopped
+    volumes:
+      - wp_data:/var/lib/mysql
+      - ./config/my.cnf:/etc/mysql/conf.d/custom.cnf
+    environment:
+      MARIADB_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MARIADB_DATABASE: $DB_NAME
+      MARIADB_USER: $DB_USER
+      MARIADB_PASSWORD: $DB_PASSWORD
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized" ]
+      start_period: 1m
+      start_interval: 10s
+      interval: 1m
+      timeout: 5s
+      retries: 3
+    networks:
+      - npm_local_network
+
+volumes:
+  wp_data:
+
+networks:
+  npm_local_network:
+    external: true
